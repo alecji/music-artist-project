@@ -1,0 +1,419 @@
+body {
+  position: relative;
+}
+.site-header {
+  background: #000;
+}
+.site-header.affix {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba( 0, 0, 0, .90 );
+}
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+  min-height: auto;
+  border: none;
+}
+.navbar-default {
+  border-bottom-color: #D2D6DF;
+  background: none;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #3a3a3a;
+}
+.navbar-brand {
+  height: auto;
+  width: 200px;
+}
+.media-fluid {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.site-search .form-group {
+  display: block;
+}
+
+@media ( min-width: 768px ) {
+  .navbar-brand {
+    width: auto;
+  }
+  .site-search {
+    margin-top: 50px;
+    width: 400px;
+  }
+}
+
+@media ( min-width: 1200px ) {
+  .site-search {
+    margin-left: 50px;
+  }
+}
+
+.site-search input[type="text"],
+.site-search button[type="submit"] {
+  float: left;
+}
+.site-search input[type="text"] {
+  width: 100%;
+  padding-right: 30%;
+  background: #3a3a3a;
+  border-color: #333131;
+}
+.site-search input[type="text"]:focus {
+  color: #fff;
+}
+.site-search button[type="submit"] {
+  color: #fff;
+  font-weight: bold;
+  width: 30%;
+  margin-left: -30%;
+  text-transform: uppercase;
+  border-color: #333131;
+  background-color: #64009e;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.site-search button[type="submit"]:hover,
+.site-search button[type="submit"]:focus {
+  border-color: #25075E;
+  background-color: #530084;
+}
+
+/*------------------------------------*\
+  #Bandsintown
+\*------------------------------------*/
+
+#bandsintown {
+	background-image: url("../img/bandsintown.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	padding-top: 60px;
+	padding-bottom: 60px;;
+}
+.artist-bio {
+	color:#fff;
+}
+.event-table {
+	background-color: rgba(255,255,255,0.5);
+}
+
+/*------------------------------------*\
+  #Social
+\*------------------------------------*/
+
+#facebook {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: linear-gradient(239deg, #3e69a2, #00778f);
+}
+
+#instagram {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: linear-gradient(344deg, #fb3958,  #458eff);
+}
+
+.fbCard {
+	margin-bottom: 30px;
+	background-color: #8b9dc3;
+}
+
+
+.instaCard {
+	padding: 10px;
+	margin-bottom: 5px;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.grid-sizer {
+  width: 33.33%;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.fbMessage {
+  border-top: 5px solid teal;
+  padding: 10px 15px;
+}
+
+.recentSearchButton{
+  margin: 2px 2px 2px 2px;
+  color: white;
+  background-color: #64009e;
+}
+
+#facebook .page-header,
+#instagram .page-header,
+#spotify .page-header,
+#youtube .page-header,
+#bandsintown .page-header{
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  margin: 10px 0 20px;
+  border-bottom: solid 5px #fff;
+}
+#facebook .page-header h1,
+#instagram .page-header h1,
+#spotify .page-header h1,
+#youtube .page-header h1,
+#bandsintown .page-header h1 {
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+
+/*------------------------------------*\
+  #Spotify
+\*------------------------------------*/
+
+#spotify {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #11a045;
+  background: -webkit-linear-gradient(to bottom, #11a045, #22c1c3);
+  background: linear-gradient(to bottom, #11a045, #22c1c3);
+}
+iframe {
+  border-radius: 5px;
+}
+
+/*------------------------------------*\
+  #Artist Navigation
+\*------------------------------------*/
+
+.navbar-subnav .navbar-nav {
+  margin: 0 -15px;
+}
+.navbar-subnav .navbar-nav > li {
+  float: left;
+}
+.navbar-subnav .navbar-nav > li a {
+  color: #fff;
+  text-transform: uppercase;
+  padding: 20px;
+}
+.navbar-subnav .navbar-nav > li > a:hover {
+  color: #9d9d9d;
+  background-color: transparent;
+}
+.navbar-subnav .navbar-nav > li.active a {
+  color: #9d9d9d;
+}
+
+/*------------------------------------*\
+	#Video
+\*------------------------------------*/
+
+#youtube {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: linear-gradient( #000 -30%, rgba( 0,0,0, .15) 150% ), url('../img/videos-bg-2.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+#youtube .page-header {
+  color: #cc181e;
+  border-bottom: solid 5px #cc181e;
+}
+.col-video,
+.col-featured-item {
+  margin-bottom: 30px;
+}
+.video-item {
+  font-family: 'Lato', sans-serif;
+  border-color: #000;
+  border-style: solid;
+  border-width: 2px;
+  background: #fff;
+  box-shadow: 0 2px 0 0 rgba( 0, 0, 0, .1 );
+}
+.video-item:hover {
+  border-color: #cc181e;
+}
+.video-item-img,
+.featured-item-img {
+  position: relative;
+  overflow: hidden;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-color: #cc181e;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+}
+.video-item:hover .video-item-img,
+.featured-item:hover .featured-item-img {
+  cursor: pointer;
+  border-color: #ededed;
+}
+.video-item-img:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+  width: 80px;
+  height: 80px;
+  background: url('../img/icon-play.png') no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.video-item-img img,
+.featured-item-img img {
+  border-radius: 0;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.video-item:hover .video-item-img img,
+.featured-item:hover .featured-item-img img {
+  -moz-transform: scale( 1.2 );
+  -webkit-transform: scale( 1.2 );
+  transform: scale( 1.2 );
+}
+.video-item-meta  {
+  height: 160px;
+  overflow: hidden;
+  padding: 10px 15px;
+}
+.video-item-published {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #ededed;
+}
+.video-item-icon {
+  margin-right: 5px;
+}
+.video-item-meta small {
+  color: #666A73;
+}
+.video-item-title {
+  color: #cc181e;
+  margin-bottom: 5px;
+}
+.video-item-desc,
+.featured-item-desc {
+  margin-bottom: 0;
+}
+.media-fluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*------------------------------------*\
+	#Modal
+\*------------------------------------*/
+
+.modal-backdrop.in {
+  filter: alpha( opacity=7 );
+  opacity: 0.7;
+}
+.modal-content {
+  background: none;
+  border: 0;
+  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+  -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+.modal-body {
+  padding: 0;
+}
+.modal-header {
+  padding: 0;
+  text-align: right;
+}
+.modal-header, .modal-footer {
+  border: 0;
+}
+.modal-header .close {
+  float: none;
+  margin: 0;
+  font-size: 36px;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: none;
+  opacity: 1;
+}
+
+/*------------------------------------*\
+  #Featured Items
+\*------------------------------------*/
+
+.featured-items {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: #F8F8FA url('../img/symphony.jpg') repeat left top;
+}
+.featured-item {
+  background-color: #fff;
+  border: solid 1px #DFDFE1;
+  box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
+}
+.featured-item-meta {
+  padding: 15px;
+}
+.featured-item-title {
+  color: #25075E;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #ededed;
+}
+.featured-item-img {
+  border-color: #25075E;
+}
+.list-searches li {
+  margin-bottom: 5px;
+}
+
+/*------------------------------------*\
+  #Carousel
+\*------------------------------------*/
+
+.carousel-caption {
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: #25075E;
+  background: -webkit-linear-gradient(left, rgba(37, 7, 94,0) 0%, rgba(37, 7, 94,0.75) 25%, rgba(37, 7, 94,0.75) 75%,rgba(37, 7, 94,0) 100%);
+  background: linear-gradient(to right, rgba(37, 7, 94,0) 0%, rgba(37, 7, 94,0.75) 25%, rgba(37, 7, 94,0.75) 75%,rgba(37, 7, 94,0) 100%)
+}
+.carousel-caption h1 {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/*------------------------------------*\
+  #footer
+\*------------------------------------*/
+
+#footer {
+  color: #fff;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #000;
+}
+
+#footer a {
+  color: #FFFFFF;
+}
+
+.credits {
+  margin-top: 3em;
+  font-size: 15px;
+}
+
+
+
