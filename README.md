@@ -2,6 +2,9 @@
 
 An app where users can search for their favorite artists and display upcoming events, social media posts, music videos and preview songs.
 
+View the project here => https://alecji.github.io/music-artist-project/
+
+
 
 ## Technologies Utilized
 1. [jQuery](https://jquery.com)
