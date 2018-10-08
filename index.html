@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>I Love Music</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js" type="text/javascript" ></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js" type="text/javascript" ></script>
+  
+  <script src="assets/js/youtube.js" type="text/javascript"></script>
+  <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript" ></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js" type="text/javascript" ></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js" type="text/javascript" ></script>
+  <script src="assets/js/firebase.js" type="text/javascript"></script>
+  <script src="assets/js/spotify.js" type="text/javascript"></script>
+  <script src="assets/js/bandsintown.js" type="text/javascript"></script>
+  
+  <script>
+    $(document).ready(function() {
+
+      // when document ready, hide most of the div and show some div
+      $("#bandsintown, #youtube, #social, #instagram, #recentSearch, #artist-navigation, #spotify, .js-artist-bio, .js-no-events").hide();
+
+      // when the search button executed, run searchBandsInTown function, show most of the div and hide some div
+      $("#searchButton").on("click", function(event) {
+        event.preventDefault();
+
+        $("#bandsintown, #youtube, #social, #instagram, #recentSearch, #artist-navigation, #spotify").show();
+        
+        var artistInput = $("#search").val().trim();
+        $("#feature-carousel").hide();
+        
+        $("#search").val("");
+        
+        searchBandsInTown(artistInput);
+        spotifySearch(artistInput);
+        populateSocial(artistInput);
+
+        window.scrollTo(0, 0);
+      });
+
+      // when carousel clicked, go to that artist
+      $('#carousel').click(function() {
+        var artist = ($(this).attr("artistName"));
+        $("#search").val(artist);
+        $("#searchButton").click();
+      });
+
+      // when read more is clicked
+      $('.js-read-more').click(function(e) {
+        e.preventDefault();
+        $(".js-artist-bio").slideToggle('fast');
+      });
+
+      // recent searches
+      $(document).on("click", ".recentSearchButton, .artist", function() {
+        var artist = ($(this).attr("artistName"));
+        $("#search").val(artist);
+        $("#searchButton").click();
+        window.scrollTo(0, 0);
+      });
+
+      // Calls Carousel
+      $('.carousel').carousel();
+
+      // Calls Tooltip
+      $(document).tooltip({
+        selector: '[data-toggle="tooltip"]'
+      });
+
+      // Smooth Scroll
+      $('.smooth-scroll').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+          if (target.length) {
+            var navHeight = $("#site-header").height();
+            var pos = target.offset();
+                pos = pos.top - navHeight;
+            $("html,body").animate( { scrollTop: pos },  800 ); return false;
+          }
+        }
+      });
+
+    });
+  </script>
+</head>
+<body data-spy="scroll" data-target="#artist-navigation" data-offset="192">
+
+  <header id="site-header" class="site-header" data-spy="affix" data-offset-top="110">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><img src="assets/img/i-love-music-logo.png" alt="iLoveMusic" class="img-responsive"></a>
+        </div>
+
+        <form class="site-search navbar-form navbar-left">
+          <div class="form-group clearfix">
+            <input type="text" class="form-control input-lg" placeholder="Search Artist" id="search" val="">
+          <button type="submit" class="btn btn-primary btn-lg text-uppercase" id="searchButton">Search</button>
+          </div>
+        </form>
+
+      </div><!-- /.container-fluid -->
+    </nav><!-- /.navbar -->
+
+    <nav id="artist-navigation" class="navbar navbar-inverse navbar-subnav">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#bandsintown" class="smooth-scroll">Events</a></li>
+          <li><a href="#youtube" class="smooth-scroll">Videos</a></li>
+          <li><a href="#spotify" class="smooth-scroll">Spotify</a></li>
+          <li><a href="#social" class="smooth-scroll">Social</a></li>
+        </ul><!-- /.navbar-nav -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar-subnav -->
+  </header><!-- /#site-header -->
+
+  <div id="feature-carousel" class="site-feature carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="assets/img/shakira.jpg" class="media-fluid" id="carousel" artistName="shakira">
+        <div class="carousel-caption">
+          <h1>SHAKIRA</h1>
+        </div>
+      </div>
+      <div class="item">
+        <img src="assets/img/drake.jpg" class="media-fluid" id="carousel" artistName="drake">
+        <div class="carousel-caption">
+          <h1>DRAKE</h1>
+        </div>
+      </div>
+      <div class="item">
+        <img src="assets/img/u2.jpg" class="media-fluid" id="carousel" artistName="u2">
+        <div class="carousel-caption">
+          <h1>U2</h1>
+        </div>
+      </div>
+      <div class="item">
+        <img src="assets/img/cold-play.jpg" class="media-fluid" id="carousel" artistName="coldplay">
+        <div class="carousel-caption">
+          <h1>COLDPLAY</h1>
+        </div>
+      </div>
+    </div><!-- /.carousel-inner -->
+
+    <a class="left carousel-control" href="#feature-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#feature-carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div><!-- /.site-feature -->
+
+  <div id="bandsintown">
+    <div class="container">
+      <div class="js-no-artist alert alert-danger"><h1 class="text-uppercase text-center h3">No Artist Found!!!</h1></div><!-- /.js-no-artist -->
+
+      <div class="row js-artist-info">
+        <div class="col-sm-3">
+          <div class="artist-profile">
+            <div class="page-header">
+              <h1 class="js-artist-name text-uppercase"></h1>
+            </div><!-- /.page-header -->
+            <p><img class="js-artist-image img-responsive img-thumbnail" src=""></p>
+            <p><a class="js-read-more btn btn-block btn-primary text-uppercase" href="#">About the Artist</a></p>
+          </div><!-- /.artist-profile -->
+        </div><!-- /.col -->
+
+        <div class="col-sm-9">
+          <div class="page-header">
+            <h1 class="text-uppercase">Upcoming Events</h1>
+          </div><!-- /.page-header -->
+
+          <div class="js-no-events alert alert-danger"><h3 class="text-uppercase text-center">No Upcoming Events!!!</h3></div><!-- /.js-no-artist -->
+
+          <div class="table-responsive">
+            <table class="table table-striped event-table js-event-table">
+              <thead>
+                <tr>
+                  <th class="th">Date</th>
+                  <th class="th">Venue</th>
+                  <th class="th">Location</th>
+                  <th class="th">Tickets</th>
+                </tr>
+              </thead>
+              <tbody class="event"></tbody>
+            </table>
+          </div><!-- /.table-responsive -->
+
+        </div><!-- /.col -->
+      </div><!-- /.js-artist-info -->
+
+      <div class="js-artist-bio artist-bio"></div><!-- /.artist-bio -->
+
+    </div><!-- /.container -->
+  </div><!-- /#bandsintown -->
+
+  <div id="youtube">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-uppercase text-center">Videos</h1>
+      </div><!-- /.page-header -->
+      <div id="videos-row" class="row"></div><!-- /#videos-row -->
+    </div><!-- /.container -->
+  </div><!-- /#youtube -->
+
+  <div id="spotify">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-uppercase text-center">Spotify</h1>
+      </div><!-- /.page-header -->
+      <div id="spotify-row"></div><!-- /#Spotify-row -->
+    </div><!-- /.container -->
+  </div><!-- /#spotify -->
+
+  <div id="social">
+    <div id="facebook">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="text-uppercase text-center">Facebook</h1>
+        </div><!-- /.page-header -->
+        <div id="fb-row" class="row"></div><!-- /#fb-row-->
+      </div><!-- /.container -->
+    </div><!-- /#facebook -->
+
+    <div id="instagram">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="text-uppercase text-center">Instagram</h1>
+        </div><!-- /.page-header -->
+        <div id="insta-row" class="row"></div><!-- /#insta-row -->
+      </div><!-- /.container -->
+    </div><!-- /#instagram -->
+  </div><!-- /#social -->
+
+  <div id="modal-video" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div><!-- /.modal-header -->
+        <div class="modal-body">
+          <div class="modal-video">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="player" class="embed-responsive-item" width="640" height="360" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div><!-- /.modal-video -->
+        </div><!-- /.modal-body -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /#modal-video -->
+
+  <div id="feaured-items" class="featured-items">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-featured-item col-sm-4">
+          <div class="featured-item">
+            <div class="featured-item-img">
+              <img src="assets/img/bruno-mars.jpg" class="media-fluid artist" artistName="bruno mars">
+            </div>
+            <div class="featured-item-meta">
+              <h4 class="featured-item-title text-uppercase">Artist of the Month</h4>
+              <p><strong>Bruno Mars</strong></p>
+              <p class="video-item-desc">Born Peter Gene Hernandez on October 8, 1985, in Honolulu, Hawaii, popular singer-songwriter Bruno Mars grew up in a very musical family....</p>
+            </div>
+          </div>
+        </div><!-- /.col -->
+
+        <div class="col-featured-item col-sm-4">
+          <div class="featured-item">
+            <div class="featured-item-img">
+              <img src="assets/img/dua-lipa.jpg" class="media-fluid artist" artistName="dua lipa">
+            </div>
+            <div class="featured-item-meta">
+              <h4 class="featured-item-title text-uppercase">Upcoming Artist</h4>
+              <p><strong>Dua Lipa</strong></p>
+              <p class="featured-item-desc">The British singer is a rising force in soulful pop, and she's scheduled to make a winter debut that will undoubtedly hit the radio...</p>
+            </div>
+          </div>
+        </div><!-- /.col -->
+
+        <div class="col-featured-item col-sm-4">
+          <div class="featured-item">
+            <div class="featured-item-img">
+              <img src="assets/img/recent-searches.jpg" class="media-fluid">
+            </div>
+            <div class="featured-item-meta">
+              <h4 class="featured-item-title text-uppercase">Recent Searches</h4>
+              <p class="video-item-desc">
+                <p><strong>Most Recent Searches by Users</strong></p>
+                <ul class="list-searches list-inline">
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div><!-- /.col -->
+
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div><!-- /#featured-items -->
+
+
+  <footer id="footer">
+    <div class="container">
+    
+
+      <p class="credits"><i class="fa fa-copyright "></i> 2018 iLoveMusic, LLC</p>
+    
+    </div><!-- /.container -->
+  </footer><!-- /#footer -->
+
+  <script type="text/javascript" src="assets/js/social.js"></script>
+</body>
+</html>
