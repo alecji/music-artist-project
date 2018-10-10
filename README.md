@@ -1,6 +1,6 @@
 # music-artist-project
 
-An app where users can search for their favorite artists and display upcoming events, social media posts, music videos and preview songs.
+An app where users can search for their favorite artists and display upcoming events, social media posts, music videos and preview songs. Built using Bandsintown, Spotify, Youtube, facebook and Instagram Api's. 
 
 View the project here => https://alecji.github.io/music-artist-project/
 
